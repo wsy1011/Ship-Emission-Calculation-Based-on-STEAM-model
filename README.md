@@ -105,7 +105,7 @@ emissions = calculate_emissions(
 print(emissions)
 ```
 
-**注意：根据你的项目结构，如果直接运行该导入示例，可能需要将项目根目录（**e:\Codes\AIS\AISwang**）添加到** **PYTHONPATH**，或将 **Scripts** **目录作为包处理（添加** **__init__.py**），或者使用相对导入。
+**注意：根据你的项目结构，如果直接运行该导入示例，可能需要将项目根目录添加到** **PYTHONPATH**，或将 **Scripts** **目录作为包处理（添加** **__init__.py**），或者使用相对导入。
 
 ## 假设与注意事项
 
@@ -227,7 +227,7 @@ emissions = calculate_emissions(
 print(emissions)
 ```
 
-**Note: Depending on your project structure, to run this import example directly, you might need to add the project root directory (e.g.,** **e:\Codes\AIS\AISwang**) to your **PYTHONPATH**, treat the **Scripts** **directory as a package (by adding an** **__init__.py** **file), or use relative imports.**
+**Note: Depending on your project structure, to run this import example directly, you might need to add the project root directory to your **PYTHONPATH**, treat the **Scripts** **directory as a package (by adding an** **__init__.py** **file), or use relative imports.**
 
 ## Assumptions and Notes
 
