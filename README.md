@@ -1,135 +1,12 @@
-# Ship-Emission-Calculation-Based-on-STEAM-model
-
-# STEAM.py Usage Instructions
-
-## Overview
-
-**STEAM.py** **is a small utility for estimating pollutant emissions based on ship speed and operating time. It provides a command-line entry point (**main()**) and can also be used as a module by directly calling the** **calculate_emissions()** **function in other Python scripts.**
-
-# Ship Emission Calculation Based on the STEAM Model
-# For calculation principles and parameter sources, see "Principle of Ship Emission Calculation.pdf"
-# For usage instructions, see Readme.md
-# Parameters are derived from a combination of emission factors from previous team publications and IMO values, and can be directly adjusted to use IMO parameters.
-# Author: Wangsuyang, Hohai University, November 11, 2025
-
-## Requirements
-
-* **Python 3.6+ (The script does not use any external third-party libraries and relies only on the standard library)**
-
-## Supported Pollutants
-
-* **NOx**
-* **CO**
-* **PM**
-* **SO2**
-* **CO2**
-
-## Main Functions
-
-* **calculate_emissions(u, T, va_max, P_m, P_a, LF_a, EF_m_NOx, EF_a_NOx, EF_m_CO, EF_a_CO, EF_m_PM, EF_a_PM, EF_m_SO2, EF_a_SO2, EF_m_CO2, EF_a_CO2)**
-
-  * **Input**: A set of parameters related to speed, power, load factor, and emission factor (EF).
-  * **Output**: A dictionary where keys are pollutant names and values are the corresponding emission amounts (the unit is determined by the input parameters, as the script does not perform explicit unit conversions).
-* **LoadFactor** **class: Calculates the main engine load factor (LF) for different pollutants based on the current speed** **u** **and the design speed** **va_max**.
-
-## Command Line Usage (PowerShell)
-
-**Example: Calculate emissions with given parameters and print to the console.**
-
-**code**Powershell
-
-```
-python .\Scripts\STEAM.py --speed 12 --time 3600 --speed_max 20 --power_main 5000 --power_aux 200
-```
-
-**Argument Descriptions:**
-
-* **--speed** **(required): Ship speed in knots. Used as** **Va** **in the script.**
-* **--time** **(required): Time interval in seconds.**
-* **--speed_max** **(required): Design speed or maximum speed in knots.**
-* **--power_main** **(required): Main engine power in kW. Used as** **P_m** **in the script.**
-* **--power_aux** **(required): Auxiliary engine power in kW. Used as** **P_a** **in the script.**
-
-**Example Output (after running the script, output will be printed in this format):**
-
-**code**Code
-
-```
-Emissions:
-NOx: 12345.67
-CO: 123.45
-PM: 12.34
-SO2: 56.78
-CO2: 987654.32
-```
-
-> **Note: The values above are for demonstration purposes. The actual results depend on the input parameters and default emission factors.**
-
-## Default Parameters (Hardcoded in the script)
-
-* **Average auxiliary engine load factor** **LF_a** **= 0.13**
-* **Emission Factors (main engine / auxiliary engine, units should be consistent with the script's expectations)**
-
-  * **NOx: EF_m = 13.2, EF_a = 13.9**
-  * **CO: EF_m = 1.1, EF_a = 1.1**
-  * **PM: EF_m = 0.47, EF_a = 0.49**
-  * **SO2: EF_m = 3.97, EF_a = 4.00**
-  * **CO2: EF_m = 677.9, EF_a = 690.7**
-
-**These default values are used in the** **main()** **function of the script. If you run the script from the command line, there is currently no option to override these EFs via arguments (unless you modify the script). However, you can call** **calculate_emissions()** **from another Python program and pass in custom EF values.**
-
-## Usage in Other Python Scripts
-
-**You can directly import and call** **calculate_emissions**:
-
-**code**Python
-
-```
-from Scripts.STEAM import calculate_emissions
-
-# Example parameters
-u = 12.0            # knots
-T = 3600            # seconds
-va_max = 20.0       # Design speed (knots)
-P_m = 5000.0        # Main engine power (kW)
-P_a = 200.0         # Auxiliary engine power (kW)
-LF_a = 0.13
-EF_m_NOx = 13.2
-EF_a_NOx = 13.9
-# ... other EFs as above
-
-emissions = calculate_emissions(
-    u, T, va_max, P_m, P_a, LF_a,
-    EF_m_NOx, EF_a_NOx,
-    1.1, 1.1,      # EF CO (example)
-    0.47, 0.49,    # EF PM
-    3.97, 4.00,    # EF SO2
-    677.9, 690.7   # EF CO2
-)
-print(emissions)
-```
-
-**Note: Depending on your project structure, to run this import example directly, you might need to add the project root directory (e.g.,** **e:\Codes\AIS\AISwang**) to your **PYTHONPATH**, treat the **Scripts** **directory as a package (by adding an** **__init__.py** **file), or use relative imports.**
-
-## Assumptions and Notes
-
-* **The Load Factor (LF) calculation is based on the script's built-in lookup** table/interpolation **logic, using the cube of** **Va/Vmax** **as the base weight.**
-* **In the script,** **m = (Va / Vmax) ** 3**. Different interpolation or table-lookup strategies are used when **m** **falls into different ranges.**
-* **Unit Consistency**: The script does not perform unit conversions. Ensure that parameters are passed in the units specified in the instructions (knots, seconds, kW).
-* **To customize individual EFs (Emission Factors) or** **LF_a**, you should call the **calculate_emissions()** **function directly and pass in your custom values.**
-
-
----
-
 # STEAM.py 使用说明
 
 ## 概述
 
 **STEAM.py** **是一个用于根据船舶航速和运行时间估算污染物排放量的小工具。它提供命令行入口（**main()**），也可以作为模块在其他 Python 脚本中直接调用** **calculate_emissions()** **函数。**
-# 计算原理及参数来源：见Principle of Ship Emission Calculation.pdf
-# 使用说明见：Readme.md
-# 结合之前以前团队发过的文章里面的排放因子和IMO的取值共同取得参数，也可以直接调整为IMO参数
-# 作者：王苏阳，河海大学, 2025年11月11日
+计算原理及参数来源：见Principle of Ship Emission Calculation.pdf
+使用说明见：Readme.md
+结合之前以前团队发过的文章里面的排放因子和IMO的取值共同取得参数，也可以直接调整为IMO参数
+作者：王苏阳，河海大学, 2025年11月11日
 
 ## 要求
 
@@ -236,3 +113,125 @@ print(emissions)
 * **脚本中** **m = (Va / Vmax) ** 3**；当 m 值处于不同区间时，会使用不同的插值或表值策略。
 * **单位一致性：脚本并未对输入单位做变换，确保以说明中的单位传入参数（节、秒、kW）。**
 * **若需逐项自定义 EF（排放因子）或 LF_a，应通过直接调用** **calculate_emissions()** **并传入自定义值来实现。**
+
+---
+
+# Ship-Emission-Calculation-Based-on-STEAM-model
+
+# STEAM.py Usage Instructions
+
+## Overview
+
+**STEAM.py** **is a small utility for estimating pollutant emissions based on ship speed and operating time. It provides a command-line entry point (**main()**) and can also be used as a module by directly calling the** **calculate_emissions()** **function in other Python scripts.**
+
+Ship Emission Calculation Based on the STEAM Model
+For calculation principles and parameter sources, see "Principle of Ship Emission Calculation.pdf"
+For usage instructions, see Readme.md
+Parameters are derived from a combination of emission factors from previous team publications and IMO values, and can be directly adjusted to use IMO parameters.
+Author: Wangsuyang, Hohai University, November 11, 2025
+
+## Requirements
+
+* **Python 3.6+ (The script does not use any external third-party libraries and relies only on the standard library)**
+
+## Supported Pollutants
+
+* **NOx**
+* **CO**
+* **PM**
+* **SO2**
+* **CO2**
+
+## Main Functions
+
+* **calculate_emissions(u, T, va_max, P_m, P_a, LF_a, EF_m_NOx, EF_a_NOx, EF_m_CO, EF_a_CO, EF_m_PM, EF_a_PM, EF_m_SO2, EF_a_SO2, EF_m_CO2, EF_a_CO2)**
+
+  * **Input**: A set of parameters related to speed, power, load factor, and emission factor (EF).
+  * **Output**: A dictionary where keys are pollutant names and values are the corresponding emission amounts (the unit is determined by the input parameters, as the script does not perform explicit unit conversions).
+* **LoadFactor** **class: Calculates the main engine load factor (LF) for different pollutants based on the current speed** **u** **and the design speed** **va_max**.
+
+## Command Line Usage (PowerShell)
+
+**Example: Calculate emissions with given parameters and print to the console.**
+
+**code**Powershell
+
+```
+python .\Scripts\STEAM.py --speed 12 --time 3600 --speed_max 20 --power_main 5000 --power_aux 200
+```
+
+**Argument Descriptions:**
+
+* **--speed** **(required): Ship speed in knots. Used as** **Va** **in the script.**
+* **--time** **(required): Time interval in seconds.**
+* **--speed_max** **(required): Design speed or maximum speed in knots.**
+* **--power_main** **(required): Main engine power in kW. Used as** **P_m** **in the script.**
+* **--power_aux** **(required): Auxiliary engine power in kW. Used as** **P_a** **in the script.**
+
+**Example Output (after running the script, output will be printed in this format):**
+
+**code**Code
+
+```
+Emissions:
+NOx: 12345.67
+CO: 123.45
+PM: 12.34
+SO2: 56.78
+CO2: 987654.32
+```
+
+> **Note: The values above are for demonstration purposes. The actual results depend on the input parameters and default emission factors.**
+
+## Default Parameters (Hardcoded in the script)
+
+* **Average auxiliary engine load factor** **LF_a** **= 0.13**
+* **Emission Factors (main engine / auxiliary engine, units should be consistent with the script's expectations)**
+
+  * **NOx: EF_m = 13.2, EF_a = 13.9**
+  * **CO: EF_m = 1.1, EF_a = 1.1**
+  * **PM: EF_m = 0.47, EF_a = 0.49**
+  * **SO2: EF_m = 3.97, EF_a = 4.00**
+  * **CO2: EF_m = 677.9, EF_a = 690.7**
+
+**These default values are used in the** **main()** **function of the script. If you run the script from the command line, there is currently no option to override these EFs via arguments (unless you modify the script). However, you can call** **calculate_emissions()** **from another Python program and pass in custom EF values.**
+
+## Usage in Other Python Scripts
+
+**You can directly import and call** **calculate_emissions**:
+
+**code**Python
+
+```
+from Scripts.STEAM import calculate_emissions
+
+# Example parameters
+u = 12.0            # knots
+T = 3600            # seconds
+va_max = 20.0       # Design speed (knots)
+P_m = 5000.0        # Main engine power (kW)
+P_a = 200.0         # Auxiliary engine power (kW)
+LF_a = 0.13
+EF_m_NOx = 13.2
+EF_a_NOx = 13.9
+# ... other EFs as above
+
+emissions = calculate_emissions(
+    u, T, va_max, P_m, P_a, LF_a,
+    EF_m_NOx, EF_a_NOx,
+    1.1, 1.1,      # EF CO (example)
+    0.47, 0.49,    # EF PM
+    3.97, 4.00,    # EF SO2
+    677.9, 690.7   # EF CO2
+)
+print(emissions)
+```
+
+**Note: Depending on your project structure, to run this import example directly, you might need to add the project root directory (e.g.,** **e:\Codes\AIS\AISwang**) to your **PYTHONPATH**, treat the **Scripts** **directory as a package (by adding an** **__init__.py** **file), or use relative imports.**
+
+## Assumptions and Notes
+
+* **The Load Factor (LF) calculation is based on the script's built-in lookup** table/interpolation **logic, using the cube of** **Va/Vmax** **as the base weight.**
+* **In the script,** **m = (Va / Vmax) ** 3**. Different interpolation or table-lookup strategies are used when **m** **falls into different ranges.**
+* **Unit Consistency**: The script does not perform unit conversions. Ensure that parameters are passed in the units specified in the instructions (knots, seconds, kW).
+* **To customize individual EFs (Emission Factors) or** **LF_a**, you should call the **calculate_emissions()** **function directly and pass in your custom values.**
