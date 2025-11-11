@@ -3,10 +3,10 @@
 ## 概述
 
 **STEAM.py** **是一个用于根据船舶航速和运行时间估算污染物排放量的小工具。它提供命令行入口（**main()**），也可以作为模块在其他 Python 脚本中直接调用** **calculate_emissions()** **函数。**
-计算原理及参数来源：见Principle of Ship Emission Calculation.pdf
-使用说明见：Readme.md
-结合之前以前团队发过的文章里面的排放因子和IMO的取值共同取得参数，也可以直接调整为IMO参数
-作者：王苏阳，河海大学, 2025年11月11日
+- 计算原理及参数来源：见Principle of Ship Emission Calculation.pdf
+- 使用说明见：Readme.md
+- 结合之前以前团队发过的文章里面的排放因子和IMO的取值共同取得参数，也可以直接调整为IMO参数
+- 作者：王苏阳，河海大学, 2025年11月11日
 
 ## 要求
 
@@ -124,11 +124,11 @@ print(emissions)
 
 **STEAM.py** **is a small utility for estimating pollutant emissions based on ship speed and operating time. It provides a command-line entry point (**main()**) and can also be used as a module by directly calling the** **calculate_emissions()** **function in other Python scripts.**
 
-Ship Emission Calculation Based on the STEAM Model
-For calculation principles and parameter sources, see "Principle of Ship Emission Calculation.pdf"
-For usage instructions, see Readme.md
-Parameters are derived from a combination of emission factors from previous team publications and IMO values, and can be directly adjusted to use IMO parameters.
-Author: Wangsuyang, Hohai University, November 11, 2025
+- Ship Emission Calculation Based on the STEAM Model
+- For calculation principles and parameter sources, see "Principle of Ship Emission Calculation.pdf"
+- For usage instructions, see Readme.md
+- Parameters are derived from a combination of emission factors from previous team publications and IMO values, and can be directly adjusted to use IMO parameters.
+- Author: Wangsuyang, Hohai University, November 11, 2025
 
 ## Requirements
 
